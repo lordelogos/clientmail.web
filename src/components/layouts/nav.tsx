@@ -17,8 +17,11 @@ export function Navigation() {
           href={routes.home}
           className="items-center space-x-2 flex"
         >
-          <Mails className="h-6 w-6" aria-hidden="true" />
-          <span className="font-bold inline-block">Resend Client</span>
+          <Mails
+            className="h-6 w-6 hidden sm:inline-block"
+            aria-hidden="true"
+          />
+          <span className="inline-block">Resend Client</span>
         </Link>
 
         <div className="flex items-center gap-4">
@@ -26,7 +29,8 @@ export function Navigation() {
             className={cn(
               buttonVariants({
                 size: "lg",
-              })
+              }),
+              "hidden sm:block",
             )}
           >
             Sign in

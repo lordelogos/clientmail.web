@@ -1,13 +1,13 @@
 import { Footer } from "@/components/layouts/footer";
 import { Navigation } from "@/components/layouts/nav";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { Balancer } from "react-wrap-balancer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex min-h-screen flex-col bg-white dark:bg-slate-950">
       <Navigation />
       <div className="container flex-1 flex items-center justify-center">
         <section
@@ -24,22 +24,23 @@ export default function Home() {
           </Balancer>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button
+            <a
+              href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`}
               className={cn(
                 buttonVariants({
                   size: "lg",
-                })
+                }),
               )}
             >
               Get Started
-            </Button>
+            </a>
             <a
               href={routes.docs}
               className={cn(
                 buttonVariants({
                   variant: "outline",
                   size: "lg",
-                })
+                }),
               )}
             >
               Read Docs
