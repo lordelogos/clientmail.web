@@ -2,11 +2,13 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "../ui/theme-toggle";
 import { Github, Mails } from "lucide-react";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
+import { siteConfig } from "@/lib/site-config";
+import { AuthAvatar } from "../ui/auth-avatar";
 
 export function DashboardNavigation() {
   return (
@@ -21,29 +23,27 @@ export function DashboardNavigation() {
             className="h-6 w-6 hidden sm:inline-block"
             aria-hidden="true"
           />
-          <span className="inline-block">Resend Client</span>
+          <span className="inline-block">{siteConfig.title as string}</span>
         </Link>
 
         <div className="flex items-center gap-4">
           <Link
-            className="hidden sm:block"
+            className={cn(
+              buttonVariants({
+                size: "icon",
+                variant: "ghost",
+              }),
+              "hidden sm:flex"
+            )}
             href={"https://github.com/lordelogos"}
             target="_blank"
             rel="noreferrer"
           >
-            <div
-              className={cn(
-                buttonVariants({
-                  size: "icon",
-                  variant: "ghost",
-                })
-              )}
-            >
-              <Github className="h-4 w-4" aria-hidden="true" />
-              <span className="sr-only">GitHub</span>
-            </div>
+            <Github className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">GitHub</span>
           </Link>
           <ThemeToggle />
+          <AuthAvatar />
         </div>
       </div>
     </div>

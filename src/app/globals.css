@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[data-sonner-toaster][data-theme="dark"] {
+  --normal-bg: rgb(2 6 23) !important;
+}

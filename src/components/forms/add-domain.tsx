@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import {
@@ -15,10 +17,52 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import { FormEventHandler, useContext, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { addTrustedDomains } from "@/lib/endpoint";
+import { UserContext } from "@/context/user";
+import { toast } from "sonner";
 
 export function AddDomainForm() {
+  const {
+    state: { user },
+    dispatch,
+  } = useContext(UserContext);
+  const [domains, setDomains] = useState("");
+  const [activity, setActivity] = useState({ addDomain: false });
+
+  const { mutate } = useMutation(addTrustedDomains, {
+    onMutate: () => {
+      setActivity({ addDomain: true });
+    },
+    onSuccess: (res) => {
+      if (!user) return;
+      toast.success("Trusted domains updated successfully.");
+      dispatch({
+        type: "SET_USER",
+        payload: { ...user, trustedDomains: res.data.data },
+      });
+      setDomains("");
+    },
+    onError: () => {
+      toast.success("Something went wrong, try again.");
+    },
+    onSettled: () => {
+      setActivity({ addDomain: false });
+    },
+  });
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    // handle string parsing
+    const domainsArr = domains.split(",").map((o) => o.trim());
+
+    mutate(domainsArr);
+  };
+
   return (
-    <Card className="w-full max-w-lg">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>Add a domain</CardTitle>
         <CardDescription>
@@ -27,7 +71,7 @@ export function AddDomainForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="flex flex-col gap-2">
+        <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
           <Label htmlFor="domain-name" className="flex items-center gap-2">
             Domain name(s)
             <TooltipProvider>
@@ -42,8 +86,17 @@ export function AddDomainForm() {
             </TooltipProvider>
           </Label>
           <div className="flex flex-col gap-4">
-            <Input id="domain-name" placeholder="e.g. example.com, abc.com" />
-            <Button variant={"default"} className="w-full">
+            <Input
+              id="domain-name"
+              placeholder="e.g. example.com, abc.com"
+              value={domains}
+              onChange={(e) => setDomains(e.target.value)}
+            />
+            <Button
+              variant={"default"}
+              className="w-full"
+              disabled={activity.addDomain}
+            >
               Add Domain
             </Button>
           </div>

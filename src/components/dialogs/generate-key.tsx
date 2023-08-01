@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,9 +12,80 @@ import {
 } from "../ui/select";
 import { BaseDialog } from "../ui/base-dialogs";
 import { useModalUtils } from "@/lib/hooks";
+import { FormEventHandler, useContext, useState } from "react";
+import { UserContext } from "@/context/user";
+import { useMutation } from "@tanstack/react-query";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
+import { HelpCircle } from "lucide-react";
+import { KeyGenerationFormOptions } from "@/lib/dtos";
+import { generateApiKeys } from "@/lib/endpoint";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { routes } from "@/lib/routes";
 
 export function GenerateKeyDialog() {
+  const router = useRouter();
+  const {
+    state: { user },
+    dispatch,
+  } = useContext(UserContext);
   const modal = useModalUtils();
+  const [activity, setActivity] = useState({ generate: false });
+  const [formData, setFormData] = useState<
+    Omit<KeyGenerationFormOptions, "trustedDomains"> & {
+      trustedDomains: string;
+    }
+  >({
+    apiKey: "",
+    trustedDomains: "",
+  });
+
+  const { mutateAsync } = useMutation(generateApiKeys, {
+    onMutate: () => {
+      setActivity({ generate: true });
+    },
+    onSuccess: (res) => {
+      if (!user) {
+        return;
+      }
+      const { publicKey, trustedDomains } = res.data.data;
+      dispatch({
+        type: "SET_USER",
+        payload: { ...user, publicKey, trustedDomains },
+      });
+      router.push(routes.dashboardOverview);
+    },
+    onSettled: () => {
+      setActivity({ generate: false });
+    },
+  });
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    // handle string parsing
+    const splitDomains = formData.trustedDomains
+      .split(",")
+      .map((o) => o.trim());
+
+    const data: KeyGenerationFormOptions = {
+      apiKey: formData.apiKey,
+      trustedDomains: splitDomains,
+    };
+
+    toast.promise(() => mutateAsync(data), {
+      loading: "Processing Request",
+      success: (res) => {
+        return `Your api key is ${res.data.data.publicKey}`;
+      },
+      error: "Error processing your request. Try again.",
+    });
+  };
   return (
     <>
       <Button variant={"default"} onClick={modal.toggle}>
@@ -25,11 +98,11 @@ export function GenerateKeyDialog() {
         description="Generate a public key for use in one-click"
         classNames="sm:w-[450px]"
       >
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid w-full items-center gap-5 mb-5">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email-service">Email service</Label>
-              <Select>
+              <Select value="resend" disabled>
                 <SelectTrigger id="email-service">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
@@ -43,11 +116,58 @@ export function GenerateKeyDialog() {
               <Input
                 id="api-key"
                 placeholder="Enter your resend private key."
+                value={formData.apiKey}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    apiKey: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label
+                htmlFor="trusted-domains"
+                className="flex items-center gap-2"
+              >
+                Trusted domains
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <HelpCircle className="w-4 h-4" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      Use a Comma (,) to separate multiple domain names
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </Label>
+              <Input
+                id="trusted-domains"
+                placeholder="e.g. example.com, abc.com"
+                value={formData.trustedDomains}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    trustedDomains: e.target.value,
+                  })
+                }
               />
             </div>
           </div>
           <div className=" flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 justify-between">
-            <Button>Generate key</Button>
+            <Button
+              variant="outline"
+              onClick={(e) => {
+                e.preventDefault();
+                modal.close();
+              }}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" disabled={activity.generate}>
+              Generate key
+            </Button>
           </div>
         </form>
       </BaseDialog>

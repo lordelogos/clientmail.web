@@ -1,17 +1,38 @@
-import { DashboardNavigation } from "@/components/layouts/dashboard-nav";
-import { DashboardTabViewer } from "@/components/layouts/dashboard-tab-viewer";
-import { Toaster } from "sonner";
+"use client";
 
-export default function Layout() {
+import { NoApiKeyState } from "@/components/empty-states/no-api-key";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { UserContext } from "@/context/user";
+import { routes } from "@/lib/routes";
+import { RedirectType } from "next/dist/client/components/redirect";
+import { redirect, useRouter } from "next/navigation";
+import { useContext } from "react";
+
+export default function DashboardLandingPage() {
+  const router = useRouter();
+  const {
+    state: { user },
+  } = useContext(UserContext);
+
+  const handleTabChange = (value: string) => {
+    return router.push(
+      value === "domains" ? routes.dashboardDomains : routes.dashboardOverview
+    );
+  };
+
+  if (user?.publicKey) {
+    redirect(routes.dashboardOverview, RedirectType.replace);
+  }
+
   return (
-    <main className="flex min-h-screen flex-col gap-5 bg-gray-50 dark:bg-slate-900">
-      <DashboardNavigation />
-      <div className="flex-1 container flex flex-col gap-5 py-5">
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-        <div className="flex-1">
-          <DashboardTabViewer />
-        </div>
-      </div>
-    </main>
+    <>
+      <Tabs onValueChange={handleTabChange} className="mb-10">
+        <TabsList>
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="domains">Domains</TabsTrigger>
+        </TabsList>
+      </Tabs>
+      <NoApiKeyState />
+    </>
   );
 }

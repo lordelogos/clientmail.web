@@ -14,6 +14,7 @@ Framework - Next 13.4 app router
 UI - ShadCN/ Radix ui
 Data fetching - Tanstack query
 State - Context/Reducer
+Requests - Axios
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

@@ -1,12 +1,8 @@
 import { cn } from "@/lib/utils";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTrigger,
-} from "./alert-dialog";
+import { AlertDialog, AlertDialogContent } from "./alert-dialog";
 import { FC, MouseEventHandler, ReactNode } from "react";
 import { Button } from "./button";
-import useMediaQuery from "@/lib/hooks";
+import { useMediaQuery } from "@/lib/hooks";
 import { Drawer } from "vaul";
 
 type DialogAction = {

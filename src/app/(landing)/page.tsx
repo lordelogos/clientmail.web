@@ -1,5 +1,5 @@
 import { Footer } from "@/components/layouts/footer";
-import { Navigation } from "@/components/layouts/nav";
+import { Navigation } from "@/components/layouts/landing-nav";
 import { buttonVariants } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
@@ -22,14 +22,13 @@ export default function Home() {
             Send Emails Directly from JavaScript Code - No Servers Needed.
             Streamlined Communication Made Easy. Try Client-Powered Emails Today
           </Balancer>
-
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`}
               className={cn(
                 buttonVariants({
                   size: "lg",
-                }),
+                })
               )}
             >
               Get Started
@@ -40,7 +39,7 @@ export default function Home() {
                 buttonVariants({
                   variant: "outline",
                   size: "lg",
-                }),
+                })
               )}
             >
               Read Docs

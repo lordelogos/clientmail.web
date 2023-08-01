@@ -1,10 +1,46 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { KeyRound } from "lucide-react";
 import { BaseDialog, DialogActions } from "../ui/base-dialogs";
 import { useModalUtils } from "@/lib/hooks";
+import { useContext, useState } from "react";
+import { UserContext } from "@/context/user";
+import { useMutation } from "@tanstack/react-query";
+import { revokeUserKeys } from "@/lib/endpoint";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export function RevokeKeyDialog() {
   const modal = useModalUtils();
+  const {
+    state: { user },
+    dispatch,
+  } = useContext(UserContext);
+  const [activity, setActivity] = useState({ revoke: false });
+
+  const { mutateAsync } = useMutation(revokeUserKeys, {
+    onMutate: () => {
+      setActivity({ revoke: true });
+    },
+    onSuccess: () => {
+      if (!user) return;
+      dispatch({ type: "SET_USER", payload: { ...user, publicKey: null } });
+    },
+    onError: () => {},
+    onSettled: () => {
+      setActivity({ revoke: false });
+    },
+  });
+
+  const handleRevoke = () => {
+    toast.promise(mutateAsync(), {
+      loading: "Processing request",
+      success: "Request successful, all api keys have been revoked",
+      error: "Something went wrong, try again.",
+    });
+  };
+
   return (
     <>
       <Button
@@ -26,7 +62,12 @@ export function RevokeKeyDialog() {
         <DialogActions
           actions={[
             { name: "Cancel", onClick: modal.close },
-            { name: "Continue", isDestructive: true },
+            {
+              name: "Continue",
+              isDestructive: true,
+              onClick: handleRevoke,
+              disabled: activity.revoke,
+            },
           ]}
         />
       </BaseDialog>

@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
+import { Fn, ModalActions } from "./dtos";
 
-export default function useMediaQuery() {
+export function useMediaQuery() {
   const [device, setDevice] = useState<"mobile" | "tablet" | "desktop" | null>(
     null
   );
@@ -48,15 +49,6 @@ export default function useMediaQuery() {
 export function sleep(timeInMs = 0) {
   return new Promise((resolve) => setTimeout(resolve, timeInMs));
 }
-
-export type Fn<T = unknown> = (...args: unknown[]) => T;
-
-export type ModalActions = {
-  visible: boolean;
-  open: Fn;
-  close: () => Promise<void>;
-  toggle: Fn;
-};
 
 const MODAL_DURATION = 280;
 

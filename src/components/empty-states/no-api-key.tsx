@@ -1,3 +1,5 @@
+"use client";
+
 import { KeyRound } from "lucide-react";
 import Balancer from "react-wrap-balancer";
 import { GenerateKeyDialog } from "../dialogs/generate-key";
