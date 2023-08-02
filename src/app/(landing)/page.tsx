@@ -9,7 +9,7 @@ import { Balancer } from "react-wrap-balancer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col bg-white dark:bg-slate-950">
+    <main className="flex min-h-screen flex-col bg-white/50 dark:bg-slate-950/50">
       <Background>
         <Navigation />
         <div className="container flex-1 flex items-center justify-center">

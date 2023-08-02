@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Auth() {
   return (
-    <main className="h-screen w-screen flex items-center justify-center bg-white dark:bg-slate-900">
+    <main className="h-screen w-screen flex items-center justify-center  dark:bg-slate-900/50">
       <Background>
         <div className="z-10 h-fit w-full max-w-md overflow-hidden border border-slate-200 dark:border-slate-800 rounded-lg sm:shadow-xl">
           <div className="flex flex-col items-center justify-center gap-5 bg-white dark:bg-slate-950 px-4 py-6 pt-8 text-center sm:px-16">
