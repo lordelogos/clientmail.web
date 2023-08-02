@@ -18,7 +18,7 @@ export function Footer() {
           Built by{" "}
           <a
             aria-label="Client-mail service author"
-            href={siteLinks.portfolio}
+            href={siteLinks.githubPersonal}
             target="_blank"
             rel="noreferrer"
             className="hidden sm:inline font-semibold transition-colors hover:text-foreground"
@@ -34,11 +34,7 @@ export function Footer() {
           />
         </div>
         <div className="flex items-center space-x-1">
-          <Link
-            href={siteLinks.githubPersonal}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <Link href={siteLinks.githubProject} target="_blank" rel="noreferrer">
             <div
               className={cn(
                 buttonVariants({

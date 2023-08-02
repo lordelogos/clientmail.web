@@ -3,7 +3,6 @@ import { Metadata } from "next";
 export const siteLinks = {
   githubPersonal: "https://github.com/lordelogos",
   xPersonal: "https://twitter.com/pauloe_me",
-  portfolio: "http://pauloe.me",
   githubProject: "",
 };
 

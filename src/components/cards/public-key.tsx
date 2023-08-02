@@ -37,7 +37,7 @@ export function PublicKeyCard() {
         }, 3000);
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(err.message);
       });
   };
 

@@ -19,7 +19,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     if (data) {
       dispatch({ type: "SET_USER", payload: data });
     }
-  }, [data, dispatch]);
+  }, [data, dispatch, isError]);
 
   if (isError) {
     redirect(routes.home);

@@ -26,10 +26,8 @@ import { KeyGenerationFormOptions } from "@/lib/dtos";
 import { generateApiKeys } from "@/lib/endpoint";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { routes } from "@/lib/routes";
 
 export function GenerateKeyDialog() {
-  const router = useRouter();
   const {
     state: { user },
     dispatch,
@@ -58,7 +56,6 @@ export function GenerateKeyDialog() {
         type: "SET_USER",
         payload: { ...user, publicKey, trustedDomains },
       });
-      router.push(routes.dashboardOverview);
     },
     onSettled: () => {
       setActivity({ generate: false });
