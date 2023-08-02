@@ -1,23 +1,30 @@
 import { Metadata } from "next";
 
+export const siteLinks = {
+  githubPersonal: "https://github.com/lordelogos",
+  xPersonal: "https://twitter.com/pauloe_me",
+  portfolio: "http://pauloe.me",
+  githubProject: "",
+};
+
 export const siteConfig: Metadata = {
-  title: "Client",
+  title: "Client-mail",
   description:
-    "Send emails from the client using javascript. No server required.",
+    "Client-mail: Send emails from the client-side using javascript. No server required. Streamline Your Email Workflow with Secure and User-Friendly Client-mail Services",
   keywords: [
-    "Resend",
+    "Client-mail",
     "React-email",
     "Emailjs",
     "Email javascript",
     "Client side",
     "Client email",
     "Email client",
-    "Resend client",
+    "Resend",
   ],
   authors: [
     {
       name: "Paul Ehikhuemen",
-      url: "https://github.com/lordelogos",
+      url: siteLinks.githubPersonal,
     },
   ],
   creator: "Paul Ehikhuemen",

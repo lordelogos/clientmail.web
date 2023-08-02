@@ -14,8 +14,9 @@ import { UserContext } from "@/context/user";
 import { updateTrustedDomains } from "@/lib/endpoint";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import clsx from "clsx";
 
-export function DomainList() {
+export function DomainList({ className }: { className?: string }) {
   const {
     state: { user },
     dispatch,
@@ -46,14 +47,14 @@ export function DomainList() {
   if (!user) return null;
 
   return (
-    <Card className="w-full">
+    <Card className={clsx("w-full", className)}>
       <CardHeader>
         <CardTitle>Trusted domains</CardTitle>
         <CardDescription>
           These domains are allowed to use this service in production
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-2">
         {!user.trustedDomains.length ? (
           <div className="flex-1 w-full flex flex-col gap-3 items-center justify-center py-5">
             <Globe className="w-10 h-10" />
@@ -79,7 +80,7 @@ function DomainListItem({
   deleteFn: () => void;
 }) {
   return (
-    <div className="flex items-center justify-between py-2 rounded-m group">
+    <div className="flex items-center justify-between p-2 rounded-md group border border-slate-200 dark:border-slate-800">
       <div className="flex items-center gap-2">
         <Link className="w-[14px] h-[14px]" />
         <p className="text-sm font-medium">{name}</p>
@@ -87,7 +88,7 @@ function DomainListItem({
       <Button
         size={"icon"}
         variant={"ghost"}
-        className="sm:text-transparent group-hover:text-slate-950 dark:group-hover:text-slate-50"
+        className="bg-slate-100 dark:bg-slate-800 hover:bg-red-500 dark:text-slate-50 dark:hover:bg-red-900  dark:hover:bg-red-900/90"
         onClick={deleteFn}
       >
         <Trash className="w-4 h-4" />

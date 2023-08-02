@@ -30,13 +30,13 @@ export default function DashboardDomainsPage() {
         <TabsTrigger value="overview">Overview</TabsTrigger>
         <TabsTrigger value="domains">Domains</TabsTrigger>
       </TabsList>
-      <TabsContent
-        value="domains"
-        className="grid grid-cols-1 xl:grid-cols-2 gap-5 py-10"
-        tabIndex={-1}
-      >
-        <AddDomainForm />
-        <DomainList />
+      <TabsContent value="domains" className="py-10" tabIndex={-1}>
+        <div className="flex flex-col gap-5">
+          <div className="grid grid-cols-1 gap-5">
+            <AddDomainForm />
+            <DomainList />
+          </div>
+        </div>
       </TabsContent>
     </Tabs>
   );

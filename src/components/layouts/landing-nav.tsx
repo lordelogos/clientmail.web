@@ -18,24 +18,17 @@ export function Navigation() {
           href={routes.home}
           className="items-center space-x-2 flex"
         >
-          <Mails
-            className="h-6 w-6 hidden sm:inline-block"
-            aria-hidden="true"
-          />
+          <Mails className="h-6 w-6 inline-block" aria-hidden="true" />
           <span className="inline-block">{siteConfig.title as string}</span>
         </Link>
 
         <div className="flex items-center gap-4">
-          <a
-            href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}`}
-            className={cn(
-              buttonVariants({
-                size: "lg",
-              })
-            )}
+          <Link
+            href={routes.auth}
+            className={cn(buttonVariants(), "hidden sm:flex")}
           >
             Sign in
-          </a>
+          </Link>
           <ThemeToggle />
         </div>
       </div>

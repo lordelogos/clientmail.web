@@ -3,6 +3,8 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Github, Twitter } from "lucide-react";
+import { siteConfig, siteLinks } from "@/lib/site-config";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -15,19 +17,25 @@ export function Footer() {
         <div className="flex-1 text-left text-sm leading-loose text-muted-foreground">
           Built by{" "}
           <a
-            aria-label="Resend client side service author"
-            href="http://pauloe.me"
+            aria-label="Client-mail service author"
+            href={siteLinks.portfolio}
             target="_blank"
             rel="noreferrer"
-            className="font-semibold transition-colors hover:text-foreground"
+            className="hidden sm:inline font-semibold transition-colors hover:text-foreground"
           >
-            Paul Ehikhuemen
-          </a>
-          .
+            {siteConfig.creator}
+          </a>{" "}
+          <Image
+            src={"/profile.jpeg"}
+            width={24}
+            height={24}
+            className="rounded-full inline-block"
+            alt="Paul Ehikhuemen's github profile"
+          />
         </div>
         <div className="flex items-center space-x-1">
           <Link
-            href={"https://github.com/lordelogos"}
+            href={siteLinks.githubPersonal}
             target="_blank"
             rel="noreferrer"
           >
@@ -36,28 +44,24 @@ export function Footer() {
                 buttonVariants({
                   size: "icon",
                   variant: "ghost",
-                }),
+                })
               )}
             >
               <Github className="h-4 w-4" aria-hidden="true" />
               <span className="sr-only">GitHub</span>
             </div>
           </Link>
-          <Link
-            href={"https://twitter.com/pauloe_me"}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <Link href={siteLinks.xPersonal} target="_blank" rel="noreferrer">
             <div
               className={cn(
                 buttonVariants({
                   size: "icon",
                   variant: "ghost",
-                }),
+                })
               )}
             >
               <Twitter className="h-4 w-4" aria-hidden="true" />
-              <span className="sr-only">Twitter</span>
+              <span className="sr-only">Twitter (x.com)</span>
             </div>
           </Link>
         </div>

@@ -1,0 +1,88 @@
+/* 
+  Master Paco would be proud. 
+  Heavily inspired by cmdk.paco.me
+*/
+
+.main * {
+  box-sizing: border-box;
+}
+
+.main {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.main:before {
+  background: radial-gradient(
+    circle,
+    var(--color-slate-50) 0,
+    hsl(0, 0%, 99%) 100%
+  );
+  position: absolute;
+  content: "";
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+.main:after {
+  content: "";
+  background-image: url("/grid.svg");
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  opacity: 0.2;
+  filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .main:before {
+    background: radial-gradient(
+      circle,
+      var(--color-slate-900) 0,
+      var(--gray1) 100%
+    );
+  }
+  .main:after {
+    filter: unset;
+  }
+}
+
+.content {
+  position: relative;
+  height: 100%;
+  max-height: 100vh;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.content:after {
+  background-image: radial-gradient(at 27% 37%, #3a8bfd 0px, transparent 50%),
+    radial-gradient(at 97% 21%, #9772fe 0px, transparent 50%),
+    radial-gradient(at 52% 99%, #fd3a4e 0px, transparent 50%),
+    radial-gradient(at 10% 29%, #5afc7d 0px, transparent 50%),
+    radial-gradient(at 97% 96%, #e4c795 0px, transparent 50%),
+    radial-gradient(at 33% 50%, #8ca8e8 0px, transparent 50%),
+    radial-gradient(at 79% 53%, #eea5ba 0px, transparent 50%);
+  position: absolute;
+  content: "";
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  filter: blur(100px) saturate(150%);
+  z-index: -1;
+  top: 80px;
+  opacity: 0.15;
+  transform: translateZ(0);
+}
