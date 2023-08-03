@@ -23,7 +23,15 @@ export function DomainList({ className }: { className?: string }) {
   } = useContext(UserContext);
 
   const { mutate } = useMutation(updateTrustedDomains, {
-    onMutate: () => {},
+    onMutate: (data) => {
+      if (!user) return;
+      const currentDomains = user.trustedDomains;
+      dispatch({
+        type: "SET_USER",
+        payload: { ...user, trustedDomains: data },
+      });
+      return { currentDomains };
+    },
     onSuccess: (res) => {
       if (!user) return;
       toast.success("Domain deleted successfully.");
@@ -32,8 +40,13 @@ export function DomainList({ className }: { className?: string }) {
         payload: { ...user, trustedDomains: res.data.data },
       });
     },
-    onError: () => {
-      toast.success("Something went wrong, try again.");
+    onError: (e, d, ctx) => {
+      if (!user || !ctx) return;
+      toast.error("Something went wrong, try again.");
+      dispatch({
+        type: "SET_USER",
+        payload: { ...user, trustedDomains: ctx.currentDomains },
+      });
     },
     onSettled: () => {},
   });

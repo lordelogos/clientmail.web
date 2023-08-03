@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const siteLinks = {
   githubPersonal: "https://github.com/lordelogos",
   xPersonal: "https://twitter.com/pauloe_me",
-  githubProject: "",
+  githubProject: "https://github.com/lordelogos/clientmail.web",
 };
 
 export const siteConfig: Metadata = {
