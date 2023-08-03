@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingState from "@/components/empty-states/loading";
 import { AddDomainForm } from "@/components/forms/add-domain";
 import { DomainList } from "@/components/layouts/domain-list";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -21,7 +22,7 @@ export default function DashboardDomainsPage() {
   };
 
   if (!user) {
-    return null;
+    return <LoadingState />;
   }
 
   return (

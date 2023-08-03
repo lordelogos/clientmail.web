@@ -2,6 +2,7 @@ import { EmailUsage } from "../cards/email-usage";
 import { EnvironmentCard } from "../cards/environment-card";
 import { PublicKeyCard } from "../cards/public-key";
 import { RevokeKeyDialog } from "../dialogs/revoke-key";
+import { UsageCard } from "../cards/usage-card";
 
 export const DashboardOverview = () => {
   return (
@@ -15,7 +16,10 @@ export const DashboardOverview = () => {
         <PublicKeyCard />
         <RevokeKeyDialog />
       </div>
-      {/* <h2 className="text-xl font-medium">Analytics</h2> */}
+      <h2 className="text-xl font-medium">Usage</h2>
+      <div className="grid grid-cols-1 gap-5">
+        <UsageCard />
+      </div>
     </div>
   );
 };

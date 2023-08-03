@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { routes } from "@/lib/routes";
 
 export function NoApiKeyState() {
   return (
@@ -25,8 +26,15 @@ export function NoApiKeyState() {
           Connect your email service api keys to start sending emails
         </Balancer>
       </CardDescription>
-      <CardFooter>
+      <CardFooter className="flex flex-col gap-2">
         <GenerateKeyDialog />
+        <a
+          href={routes.docs}
+          target="_blank"
+          className="border-b border-dashed text-sm text-slate-500 dark:text-slate-400"
+        >
+          or read the docs
+        </a>
       </CardFooter>
     </Card>
   );

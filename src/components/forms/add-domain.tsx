@@ -22,6 +22,7 @@ import { useMutation } from "@tanstack/react-query";
 import { addTrustedDomains } from "@/lib/endpoint";
 import { UserContext } from "@/context/user";
 import { toast } from "sonner";
+import { isValidDomain } from "@/lib/utils";
 
 export function AddDomainForm() {
   const {
@@ -55,10 +56,20 @@ export function AddDomainForm() {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    // handle string parsing
+    if (!domains.length) return;
+
     const domainsArr = domains.split(",").map((o) => o.trim());
 
-    mutate(domainsArr);
+    try {
+      domainsArr.map((o) => {
+        if (!isValidDomain(o)) {
+          throw new Error(`${o} is not a valid domain name`);
+        }
+      });
+      mutate(domainsArr);
+    } catch (err) {
+      toast.error((err as { message: string }).message);
+    }
   };
 
   return (

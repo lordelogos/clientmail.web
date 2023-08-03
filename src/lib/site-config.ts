@@ -4,6 +4,7 @@ export const siteLinks = {
   githubPersonal: "https://github.com/lordelogos",
   xPersonal: "https://twitter.com/pauloe_me",
   githubProject: "https://github.com/lordelogos/clientmail.web",
+  resendSite: "https://resend.com",
 };
 
 export const siteConfig: Metadata = {

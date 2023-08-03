@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingState from "@/components/empty-states/loading";
 import { DashboardOverview } from "@/components/layouts/dashboard-overview";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserContext } from "@/context/user";
@@ -19,7 +20,7 @@ export default function DashboardOverviewPage() {
   };
 
   if (!user) {
-    return null;
+    return <LoadingState />;
   }
 
   if (!user.publicKey) {

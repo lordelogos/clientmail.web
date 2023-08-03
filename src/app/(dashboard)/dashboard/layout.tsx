@@ -11,7 +11,7 @@ import { ReactNode, useContext, useEffect } from "react";
 import { Toaster } from "sonner";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
-  const { data, isFetching, isError } = useFetchUser();
+  const { data, isError } = useFetchUser();
   const { dispatch } = useContext(UserContext);
   const { theme } = useTheme();
 
@@ -19,7 +19,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     if (data) {
       dispatch({ type: "SET_USER", payload: data });
     }
-  }, [data, dispatch, isError]);
+  }, [data, dispatch]);
 
   if (isError) {
     redirect(routes.home);
@@ -30,11 +30,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <DashboardNavigation />
       <div className="flex-1 container flex flex-col gap-5 py-5">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-        {isFetching ? (
-          <LoadingState />
-        ) : (
-          <div className="flex-1">{children}</div>
-        )}
+        {!data ? <LoadingState /> : <div className="flex-1">{children}</div>}
       </div>
       <Toaster
         position="bottom-right"

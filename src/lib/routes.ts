@@ -5,5 +5,5 @@ export const routes = {
   dashboard: "/dashboard",
   dashboardOverview: "/dashboard/overview",
   dashboardDomains: "/dashboard/domains",
-  docs: "http://docs.resend",
+  docs: "https://docs.clientmail.xyz",
 };

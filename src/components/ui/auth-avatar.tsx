@@ -24,7 +24,6 @@ export function AuthAvatar() {
 
   const handleLogout = () => {
     dispatch({ type: "DELETE_USER", payload: null });
-    sessionStorage.removeItem("accessToken");
     router.push(routes.home);
   };
   return (

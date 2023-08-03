@@ -21,17 +21,17 @@ export function Footer() {
             href={siteLinks.githubPersonal}
             target="_blank"
             rel="noreferrer"
-            className="hidden sm:inline font-semibold transition-colors hover:text-foreground"
+            className="font-semibold transition-colors hover:text-foreground"
           >
-            {siteConfig.creator}
-          </a>{" "}
-          <Image
-            src={"/profile.jpeg"}
-            width={24}
-            height={24}
-            className="rounded-full inline-block"
-            alt="Paul Ehikhuemen's github profile"
-          />
+            <span className="hidden sm:inline">{siteConfig.creator}</span>{" "}
+            <Image
+              src={"/profile.jpeg"}
+              width={24}
+              height={24}
+              className="rounded-full inline-block"
+              alt="Paul Ehikhuemen's github profile"
+            />
+          </a>
         </div>
         <div className="flex items-center space-x-1">
           <Link href={siteLinks.githubProject} target="_blank" rel="noreferrer">
