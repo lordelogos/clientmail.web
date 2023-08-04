@@ -25,9 +25,10 @@ import { HelpCircle } from "lucide-react";
 import { KeyGenerationFormOptions } from "@/lib/dtos";
 import { generateApiKeys } from "@/lib/endpoint";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 export function GenerateKeyDialog() {
+  const { getToken } = useAuth();
   const {
     state: { user },
     dispatch,
@@ -62,20 +63,22 @@ export function GenerateKeyDialog() {
     },
   });
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
-    // handle string parsing
-    const splitDomains = formData.trustedDomains
-      .split(",")
-      .map((o) => o.trim());
+    const splitDomains =
+      formData.trustedDomains === ""
+        ? []
+        : formData.trustedDomains.split(",").map((o) => o.trim());
 
     const data: KeyGenerationFormOptions = {
       apiKey: formData.apiKey,
       trustedDomains: splitDomains,
     };
 
-    toast.promise(() => mutateAsync(data), {
+    const token = await getToken({ template: "client-mail" });
+
+    toast.promise(() => mutateAsync({ ...data, token: token ?? "" }), {
       loading: "Processing Request",
       success: (res) => {
         return `Your api key is ${res.data.data.publicKey}`;

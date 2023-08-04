@@ -3,28 +3,15 @@
 import { Mails } from "lucide-react";
 import { routes } from "@/lib/routes";
 import { useContext, useEffect } from "react";
-import { useFetchUser } from "@/lib/queries";
+import { useResolveUser } from "@/lib/queries";
 import { UserContext } from "@/context/user";
 import { useRouter } from "next/navigation";
 import { siteConfig } from "@/lib/site-config";
 
-export default function AuthLogin({
-  params,
-  searchParams,
-}: {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export default function AuthLogin() {
   const router = useRouter();
-  const token = searchParams.token as string;
-  const { data } = useFetchUser();
+  const { data } = useResolveUser();
   const { dispatch } = useContext(UserContext);
-
-  useEffect(() => {
-    if (token) {
-      sessionStorage.setItem("accessToken", token);
-    }
-  }, [token]);
 
   useEffect(() => {
     if (data) {

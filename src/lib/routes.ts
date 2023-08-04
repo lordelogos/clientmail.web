@@ -5,5 +5,5 @@ export const routes = {
   dashboard: "/dashboard",
   dashboardOverview: "/dashboard/overview",
   dashboardDomains: "/dashboard/domains",
-  docs: "https://docs.clientmail.xyz",
+  docs: "https://www.npmjs.com/package/client-mail",
 };

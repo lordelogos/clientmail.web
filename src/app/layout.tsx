@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import QueryProvider from "@/components/query-provider";
 import { UserContextProvider } from "@/context/user";
 import { siteConfig } from "@/lib/site-config";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,14 +17,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <UserContextProvider>
-            <QueryProvider>{children}</QueryProvider>
-          </UserContextProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={inter.className}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <UserContextProvider>
+              <QueryProvider>{children}</QueryProvider>
+            </UserContextProvider>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

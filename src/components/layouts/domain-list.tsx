@@ -15,8 +15,10 @@ import { updateTrustedDomains } from "@/lib/endpoint";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import clsx from "clsx";
+import { useAuth } from "@clerk/nextjs";
 
 export function DomainList({ className }: { className?: string }) {
+  const { getToken } = useAuth();
   const {
     state: { user },
     dispatch,
@@ -28,7 +30,7 @@ export function DomainList({ className }: { className?: string }) {
       const currentDomains = user.trustedDomains;
       dispatch({
         type: "SET_USER",
-        payload: { ...user, trustedDomains: data },
+        payload: { ...user, trustedDomains: data.domains },
       });
       return { currentDomains };
     },
@@ -51,10 +53,11 @@ export function DomainList({ className }: { className?: string }) {
     onSettled: () => {},
   });
 
-  const handleDelete = (name: string) => {
+  const handleDelete = async (name: string) => {
     if (!user) return;
     const updatedDomains = user.trustedDomains.filter((o) => o !== name);
-    mutate(updatedDomains);
+    const token = (await getToken({ template: "client-mail" })) ?? "";
+    mutate({ domains: updatedDomains, token });
   };
 
   if (!user) return null;

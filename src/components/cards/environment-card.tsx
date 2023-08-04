@@ -6,8 +6,10 @@ import { useContext, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { updateUserEnvironment } from "@/lib/endpoint";
 import { toast } from "sonner";
+import { useAuth } from "@clerk/nextjs";
 
 export function EnvironmentCard() {
+  const { getToken } = useAuth();
   const {
     state: { user },
     dispatch,
@@ -22,12 +24,15 @@ export function EnvironmentCard() {
     onMutate: () => {
       setActivity({ updating: true });
     },
-    onSuccess: (data, environment) => {
+    onSuccess: (data, res) => {
       if (!user) return;
 
-      dispatch({ type: "SET_USER", payload: { ...user, environment } });
+      dispatch({
+        type: "SET_USER",
+        payload: { ...user, environment: res.environment },
+      });
       toast.success("Environment updated successfully.");
-      setProduction(environment === "production");
+      setProduction(res.environment === "production");
     },
     onError: () => {
       toast.error("Error updating environment, try again.");
@@ -38,7 +43,8 @@ export function EnvironmentCard() {
   });
 
   const handleChange = async (checked: boolean) => {
-    mutate(checked ? "production" : "development");
+    const token = (await getToken({ template: "client-mail" })) ?? "";
+    mutate({ environment: checked ? "production" : "development", token });
   };
 
   return (

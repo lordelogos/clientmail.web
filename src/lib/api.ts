@@ -1,6 +1,6 @@
 "use client";
 
-import axios, { AxiosRequestHeaders } from "axios";
+import axios from "axios";
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
@@ -11,12 +11,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const { headers = {} as AxiosRequestHeaders } = config;
-    const token = window.sessionStorage.getItem("accessToken");
-    if (token) {
-      headers["Authorization"] = `Bearer ${token}`;
-    }
-    return { ...config, headers };
+    return config;
   },
   (error) => {
     return Promise.reject(error);

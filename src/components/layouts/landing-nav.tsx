@@ -11,7 +11,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export function Navigation() {
   return (
-    <div className="w-full sticky top-0">
+    <div className="w-full sticky top-0 pt-5">
       <div className="container flex h-16 items-center justify-between">
         <Link
           aria-label="Home"

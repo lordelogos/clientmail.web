@@ -23,8 +23,10 @@ import { addTrustedDomains } from "@/lib/endpoint";
 import { UserContext } from "@/context/user";
 import { toast } from "sonner";
 import { isValidDomain } from "@/lib/utils";
+import { useAuth } from "@clerk/nextjs";
 
 export function AddDomainForm() {
+  const { getToken } = useAuth();
   const {
     state: { user },
     dispatch,
@@ -53,7 +55,7 @@ export function AddDomainForm() {
     },
   });
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
     if (!domains.length) return;
@@ -61,12 +63,13 @@ export function AddDomainForm() {
     const domainsArr = domains.split(",").map((o) => o.trim());
 
     try {
+      const token = (await getToken({ template: "client-mail" })) ?? "";
       domainsArr.map((o) => {
         if (!isValidDomain(o)) {
           throw new Error(`${o} is not a valid domain name`);
         }
       });
-      mutate(domainsArr);
+      mutate({ domains: domainsArr, token });
     } catch (err) {
       toast.error((err as { message: string }).message);
     }

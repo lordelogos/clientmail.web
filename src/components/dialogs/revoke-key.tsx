@@ -9,9 +9,10 @@ import { UserContext } from "@/context/user";
 import { useMutation } from "@tanstack/react-query";
 import { revokeUserKeys } from "@/lib/endpoint";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 export function RevokeKeyDialog() {
+  const { getToken } = useAuth();
   const modal = useModalUtils();
   const {
     state: { user },
@@ -33,8 +34,9 @@ export function RevokeKeyDialog() {
     },
   });
 
-  const handleRevoke = () => {
-    toast.promise(mutateAsync(), {
+  const handleRevoke = async () => {
+    const token = (await getToken({ template: "client-mail" })) ?? "";
+    toast.promise(mutateAsync({ token }), {
       loading: "Processing request",
       success: "Request successful, all api keys have been revoked",
       error: "Something went wrong, try again.",

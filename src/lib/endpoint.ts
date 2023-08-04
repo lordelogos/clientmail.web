@@ -1,5 +1,10 @@
 import instance from "./api";
-import { ApiResponse, Environment, KeyGenerationFormOptions } from "./dtos";
+import {
+  ApiResponse,
+  Environment,
+  KeyGenerationFormOptions,
+  WithToken,
+} from "./dtos";
 import { User } from "./entities";
 
 /**
@@ -12,30 +17,44 @@ import { User } from "./entities";
  * fetch user
  */
 
-export const fetchUser = () => {
-  return instance.get<ApiResponse<User>>("/users");
+export const resolveUser = ({ token }: WithToken) => {
+  instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return instance.post<ApiResponse<User>>("/auth/callback");
 };
 
-export const generateApiKeys = (data: KeyGenerationFormOptions) => {
+export const generateApiKeys = (data: WithToken<KeyGenerationFormOptions>) => {
+  instance.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
   return instance.post<
     ApiResponse<{ publicKey: string; trustedDomains: string[] }>
   >("/generate-key", data);
 };
 
-export const addTrustedDomains = (domains: string[]) => {
-  return instance.post<ApiResponse<Array<string>>>("/domains", { domains });
-};
-
-export const updateTrustedDomains = (domains: string[]) => {
-  return instance.put<ApiResponse<Array<string>>>("/domains/update", {
-    domains,
+export const addTrustedDomains = (data: WithToken<{ domains: string[] }>) => {
+  instance.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
+  return instance.post<ApiResponse<Array<string>>>("/domains", {
+    domains: data.domains,
   });
 };
 
-export const revokeUserKeys = () => {
+export const updateTrustedDomains = (
+  data: WithToken<{ domains: string[] }>
+) => {
+  instance.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
+  return instance.put<ApiResponse<Array<string>>>("/domains/update", {
+    domains: data.domains,
+  });
+};
+
+export const revokeUserKeys = (data: WithToken) => {
+  instance.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
   return instance.delete<ApiResponse<null>>("/revoke-keys");
 };
 
-export const updateUserEnvironment = (environment: Environment) => {
-  return instance.patch<ApiResponse<null>>("/environment", { environment });
+export const updateUserEnvironment = (
+  data: WithToken<{ environment: Environment }>
+) => {
+  instance.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
+  return instance.patch<ApiResponse<null>>("/environment", {
+    environment: data.environment,
+  });
 };

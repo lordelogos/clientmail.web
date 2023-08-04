@@ -7,6 +7,8 @@ export type ModalActions = {
   toggle: Fn;
 };
 
+export type WithToken<T = {}> = T & { token: string };
+
 export type Environment = "production" | "development";
 
 export type ApiResponse<T = Record<string, unknown>> = {

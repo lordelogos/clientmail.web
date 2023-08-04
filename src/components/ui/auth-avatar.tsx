@@ -6,7 +6,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut } from "lucide-react";
 import { Avatar } from "./avatar";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { useContext } from "react";
@@ -14,6 +13,7 @@ import { UserContext } from "@/context/user";
 import { Button } from "./button";
 import { useRouter } from "next/navigation";
 import { routes } from "@/lib/routes";
+import { SignOutButton } from "@clerk/nextjs";
 
 export function AuthAvatar() {
   const router = useRouter();
@@ -41,8 +41,7 @@ export function AuthAvatar() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-24" align="end">
         <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Log out</span>
+          <SignOutButton signOutCallback={handleLogout} />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
