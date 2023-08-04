@@ -116,6 +116,7 @@ export function GenerateKeyDialog() {
               <Input
                 id="api-key"
                 placeholder="Enter your resend private key."
+                required
                 value={formData.apiKey}
                 onChange={(e) =>
                   setFormData({
@@ -155,7 +156,7 @@ export function GenerateKeyDialog() {
               />
             </div>
           </div>
-          <div className=" flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 justify-between">
+          <div className=" flex flex-col-reverse gap-3 sm:gap-0 sm:flex-row sm:justify-end sm:space-x-2 justify-between">
             <Button
               variant="outline"
               onClick={(e) => {

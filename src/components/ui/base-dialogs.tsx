@@ -51,6 +51,7 @@ export const DialogActions: FC<{ actions: DialogAction[] }> = ({ actions }) => {
           key={i}
           onClick={o.onClick}
           variant={o.isDestructive ? "destructive" : "outline"}
+          disabled={o.disabled}
         >
           {o.name}
         </Button>
@@ -67,14 +68,11 @@ export const BaseDialog: FC<BaseDialogProps> = ({
   description,
   classNames,
 }) => {
-  const { isMobile } = useMediaQuery();
+  const { isMobile } = { isMobile: false }; // useMediaQuery();
+
   if (isMobile) {
     return (
-      <Drawer.Root
-        open={isVisible}
-        onOpenChange={toggleVisibility}
-        shouldScaleBackground
-      >
+      <Drawer.Root open={isVisible} onOpenChange={toggleVisibility}>
         <Drawer.Overlay className="fixed inset-0 z-40 bg-gray-100 bg-opacity-10 backdrop-blur" />
         <Drawer.Portal>
           <Drawer.Content
@@ -98,7 +96,6 @@ export const BaseDialog: FC<BaseDialogProps> = ({
               {children}
             </div>
           </Drawer.Content>
-          <Drawer.Overlay />
         </Drawer.Portal>
       </Drawer.Root>
     );

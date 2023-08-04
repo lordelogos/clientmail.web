@@ -1,3 +1,4 @@
+import { url } from "inspector";
 import { Metadata } from "next";
 
 export const siteLinks = {
@@ -8,11 +9,20 @@ export const siteLinks = {
 };
 
 export const siteConfig: Metadata = {
-  title: "Client-mail",
+  title: "Clientmail",
   description:
     "Client-mail: Send emails from the client-side using javascript. No server required. Streamline Your Email Workflow with Secure and User-Friendly Client-mail Services",
+  openGraph: {
+    title: "Clientmail - Send Email from your client-side with javascript",
+    description:
+      "ClientMail enables you to send emails directly from the client-side of your javacript and typescript project. There is no need to setup your own server to handle emails. It works with the most popular email services.",
+    images: [{ url: "/clientmail-og.jpg" }],
+    siteName: "Clientmail",
+    type: "website",
+    locale: "en-US",
+  },
   keywords: [
-    "Client-mail",
+    "Clientmail",
     "React-email",
     "Emailjs",
     "Email javascript",
@@ -28,4 +38,9 @@ export const siteConfig: Metadata = {
     },
   ],
   creator: "Paul Ehikhuemen",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };

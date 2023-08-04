@@ -63,7 +63,13 @@ export function RevokeKeyDialog() {
       >
         <DialogActions
           actions={[
-            { name: "Cancel", onClick: modal.close },
+            {
+              name: "Cancel",
+              onClick: (e) => {
+                e.preventDefault();
+                modal.close();
+              },
+            },
             {
               name: "Continue",
               isDestructive: true,
