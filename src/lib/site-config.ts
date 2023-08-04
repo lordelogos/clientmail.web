@@ -16,10 +16,10 @@ export const siteConfig: Metadata = {
     title: "Clientmail - Send Email from your client-side with javascript",
     description:
       "ClientMail enables you to send emails directly from the client-side of your javacript and typescript project. There is no need to setup your own server to handle emails. It works with the most popular email services.",
-    images: [{ url: "/clientmail-og.jpg" }],
     siteName: "Clientmail",
     type: "website",
     locale: "en-US",
+    url: "https://clientmail.xyz",
   },
   keywords: [
     "Clientmail",
