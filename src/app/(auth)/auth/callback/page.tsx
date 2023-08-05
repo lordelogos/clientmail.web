@@ -6,7 +6,7 @@ import { useContext, useEffect } from "react";
 import { useResolveUser } from "@/lib/queries";
 import { UserContext } from "@/context/user";
 import { useRouter } from "next/navigation";
-import { siteConfig } from "@/lib/site-config";
+import { siteInfo } from "@/lib/site-config";
 
 export default function AuthLogin() {
   const router = useRouter();
@@ -24,9 +24,8 @@ export default function AuthLogin() {
     <main className="h-screen w-screen flex items-center justify-center bg-white dark:bg-slate-950">
       <div className="flex flex-col items-center justify-center gap-2">
         <Mails className="w-10 h-10" />
-        <span className="font-bold inline-flex items-center gap-2 text-lg">
-          {siteConfig.title as string}{" "}
-          <Loader2 className="w-4 h-4 animate-spin" />
+        <span className="font-bold inline-flex flex-col items-center gap-1 text-lg">
+          {siteInfo.name as string} <Loader2 className="w-4 h-4 animate-spin" />
         </span>
       </div>
     </main>

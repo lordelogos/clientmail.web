@@ -7,7 +7,7 @@ import { Mails } from "lucide-react";
 import { buttonVariants } from "../ui/button";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
-import { siteConfig } from "@/lib/site-config";
+import { siteInfo } from "@/lib/site-config";
 
 export function Navigation() {
   return (
@@ -19,7 +19,7 @@ export function Navigation() {
           className="items-center space-x-2 flex"
         >
           <Mails className="h-6 w-6 inline-block" aria-hidden="true" />
-          <span className="inline-block">{siteConfig.title as string}</span>
+          <span className="inline-block">{siteInfo.name as string}</span>
         </Link>
 
         <div className="flex items-center gap-4">

@@ -7,7 +7,7 @@ import { Github, Mails } from "lucide-react";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
-import { siteConfig, siteLinks } from "@/lib/site-config";
+import { siteInfo, siteLinks } from "@/lib/site-config";
 import { AuthAvatar } from "../ui/auth-avatar";
 
 export function DashboardNavigation() {
@@ -23,7 +23,7 @@ export function DashboardNavigation() {
             className="h-6 w-6 hidden sm:inline-block"
             aria-hidden="true"
           />
-          <span className="inline-block">{siteConfig.title as string}</span>
+          <span className="inline-block">{siteInfo.name as string}</span>
         </Link>
 
         <div className="flex items-center gap-4">

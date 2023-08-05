@@ -8,8 +8,15 @@ export const siteLinks = {
   url: "https://clientmail.xyz",
 };
 
+export const siteInfo = {
+  name: "Clientmail",
+};
+
 export const siteConfig: Metadata = {
-  title: "Clientmail",
+  title: {
+    default: `Dashboard - ${siteInfo.name}`,
+    template: `%s - ${siteInfo.name}`,
+  },
   description:
     "Client-mail: Send emails from the client-side using javascript. No server required. Streamline Your Email Workflow with Secure and User-Friendly Client-mail Services",
   openGraph: {
