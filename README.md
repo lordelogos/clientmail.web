@@ -1,6 +1,6 @@
 <div align="center"><img src="https://github.com/lordelogos/clientmail.js/assets/67395687/c7862e34-598f-4f1a-835d-f66be99677ea" alt="client mail logo"></div>
 
-<div align="center"><h1>Clientmail</h1></div>
+<div align="center"><h1>Clientmail/web</h1></div>
 
 Clientmail is a package that allows you send emails directly from your client-side code in your javascript or typescript project. You can easily integrate email functionality into your web applications without any need for server-side code or complicated overhead. The process of sending emails is all handled for you in a quick and reliable way.
 
