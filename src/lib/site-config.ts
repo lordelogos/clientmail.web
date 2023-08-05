@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import { Metadata } from "next";
 
 export const siteLinks = {
@@ -6,6 +5,7 @@ export const siteLinks = {
   xPersonal: "https://twitter.com/pauloe_me",
   githubProject: "https://github.com/lordelogos/clientmail.web",
   resendSite: "https://resend.com",
+  url: "https://clientmail.xyz",
 };
 
 export const siteConfig: Metadata = {
@@ -19,7 +19,7 @@ export const siteConfig: Metadata = {
     siteName: "Clientmail",
     type: "website",
     locale: "en-US",
-    url: "https://clientmail.xyz",
+    url: siteLinks.url,
   },
   keywords: [
     "Clientmail",

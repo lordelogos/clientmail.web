@@ -1,6 +1,6 @@
 "use client";
 
-import { Mails } from "lucide-react";
+import { Loader2, Mails } from "lucide-react";
 import { routes } from "@/lib/routes";
 import { useContext, useEffect } from "react";
 import { useResolveUser } from "@/lib/queries";
@@ -22,10 +22,11 @@ export default function AuthLogin() {
 
   return (
     <main className="h-screen w-screen flex items-center justify-center bg-white dark:bg-slate-950">
-      <div className="flex flex-col items-center justify-center gap-2 animate-pulse">
+      <div className="flex flex-col items-center justify-center gap-2">
         <Mails className="w-10 h-10" />
-        <span className="font-bold inline-block text-lg">
-          {siteConfig.title as string}
+        <span className="font-bold inline-flex items-center gap-2 text-lg">
+          {siteConfig.title as string}{" "}
+          <Loader2 className="w-4 h-4 animate-spin" />
         </span>
       </div>
     </main>

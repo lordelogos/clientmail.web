@@ -6,4 +6,5 @@ export const routes = {
   dashboardOverview: "/dashboard/overview",
   dashboardDomains: "/dashboard/domains",
   docs: "https://www.npmjs.com/package/client-mail",
+  ssoCallback: "/auth/sso-callback",
 };
