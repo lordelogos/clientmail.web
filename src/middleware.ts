@@ -6,8 +6,14 @@ export default authMiddleware({
   publicRoutes: [routes.home, routes.auth],
   async afterAuth(auth, req) {
     if (auth.isPublicRoute) {
-      //  For public routes, we don't need to do anything
       return NextResponse.next();
+    }
+
+    const url = new URL(req.nextUrl.origin);
+
+    if (!auth.userId) {
+      url.pathname = routes.auth;
+      return NextResponse.redirect(url);
     }
   },
 });

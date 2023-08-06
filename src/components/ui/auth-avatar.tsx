@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar } from "./avatar";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { useContext, useTransition } from "react";
+import { useContext } from "react";
 import { UserContext } from "@/context/user";
 import { Button } from "./button";
 import { useRouter } from "next/navigation";
@@ -17,17 +17,14 @@ import { SignOutButton } from "@clerk/nextjs";
 
 export function AuthAvatar() {
   const router = useRouter();
-  const [_, startTransition] = useTransition();
   const {
     state: { user },
     dispatch,
   } = useContext(UserContext);
 
   const handleLogout = () => {
-    startTransition(() => {
-      dispatch({ type: "DELETE_USER", payload: null });
-      router.push(routes.home);
-    });
+    dispatch({ type: "DELETE_USER", payload: null });
+    router.push(routes.home);
   };
   return (
     <DropdownMenu>
