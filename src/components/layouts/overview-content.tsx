@@ -4,7 +4,7 @@ import { PublicKeyCard } from "../cards/public-key";
 import { RevokeKeyDialog } from "../dialogs/revoke-key";
 import { UsageCard } from "../cards/usage-card";
 
-export const DashboardOverview = () => {
+export const OverviewContent = () => {
   return (
     <div className="flex flex-col gap-5">
       <div className="grid grid-cols-1 lg:grid-cols-2  gap-4">
