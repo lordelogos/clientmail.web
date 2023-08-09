@@ -28,6 +28,13 @@ export const siteConfig: Metadata = {
     locale: "en-US",
     url: siteLinks.url,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Clientmail - Send Email from your client-side with javascript",
+    description:
+      "ClientMail enables you to send emails directly from the client-side of your javacript and typescript project. There is no need to setup your own server to handle emails. It works with the most popular email services.",
+    creator: "@pauloe_me",
+  },
   keywords: [
     "Clientmail",
     "React-email",
