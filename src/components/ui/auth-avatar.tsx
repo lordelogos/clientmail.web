@@ -13,10 +13,8 @@ import { UserContext } from "@/context/user";
 import { Button } from "./button";
 import { useRouter } from "next/navigation";
 import { routes } from "@/lib/routes";
-import { useClerk } from "@clerk/nextjs";
 
 export function AuthAvatar() {
-  const { signOut } = useClerk();
   const router = useRouter();
   const {
     state: { user },
@@ -24,7 +22,6 @@ export function AuthAvatar() {
   } = useContext(UserContext);
 
   const handleLogout = () => {
-    signOut();
     dispatch({ type: "DELETE_USER", payload: null });
     router.push(routes.home);
   };
