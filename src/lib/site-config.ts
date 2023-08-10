@@ -5,6 +5,7 @@ export const siteLinks = {
   xPersonal: "https://twitter.com/pauloe_me",
   githubProject: "https://github.com/lordelogos/clientmail.web",
   resendSite: "https://resend.com",
+  plunkSite: "https://useplunk.com",
   url: "https://clientmail.xyz",
 };
 
@@ -40,10 +41,10 @@ export const siteConfig: Metadata = {
     "React-email",
     "Emailjs",
     "Email javascript",
-    "Client side",
     "Client email",
     "Email client",
     "Resend",
+    "Plunk",
   ],
   authors: [
     {
