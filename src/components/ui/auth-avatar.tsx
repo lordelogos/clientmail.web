@@ -24,7 +24,6 @@ export function AuthAvatar() {
   } = useContext(UserContext);
 
   const handleLogout = () => {
-    signOut();
     dispatch({ type: "DELETE_USER", payload: null });
     router.push(routes.home);
   };
