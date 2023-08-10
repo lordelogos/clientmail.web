@@ -34,7 +34,7 @@ export function GenerateKeyDialog() {
     dispatch,
   } = useContext(UserContext);
   const modal = useModalUtils();
-  const [emailService, setEmailService] = useState("");
+  const [emailService, setEmailService] = useState("resend");
   const [activity, setActivity] = useState({ generate: false });
   const [formData, setFormData] = useState<
     Omit<KeyGenerationFormOptions, "trustedDomains"> & {
