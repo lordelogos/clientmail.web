@@ -34,6 +34,7 @@ export function GenerateKeyDialog() {
     dispatch,
   } = useContext(UserContext);
   const modal = useModalUtils();
+  const [emailService, setEmailService] = useState("resend");
   const [activity, setActivity] = useState({ generate: false });
   const [formData, setFormData] = useState<
     Omit<KeyGenerationFormOptions, "trustedDomains"> & {
@@ -102,12 +103,13 @@ export function GenerateKeyDialog() {
           <div className="grid w-full items-center gap-5 mb-5">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email-service">Email service</Label>
-              <Select value="resend" disabled>
+              <Select value={emailService} onValueChange={setEmailService}>
                 <SelectTrigger id="email-service">
-                  <SelectValue placeholder="Select" />
+                  <SelectValue placeholder="Resend" />
                 </SelectTrigger>
-                <SelectContent position="popper" defaultValue={"resend"}>
+                <SelectContent position="popper">
                   <SelectItem value="resend">Resend</SelectItem>
+                  <SelectItem value="plunk">Plunk</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -115,7 +117,7 @@ export function GenerateKeyDialog() {
               <Label htmlFor="api-key">API Key</Label>
               <Input
                 id="api-key"
-                placeholder="Enter your resend private key."
+                placeholder={`Enter your ${emailService} api key.`}
                 required
                 value={formData.apiKey}
                 onChange={(e) =>

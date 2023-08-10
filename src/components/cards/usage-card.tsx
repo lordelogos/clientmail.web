@@ -89,9 +89,17 @@ export function UsageCard() {
           <a
             href={siteLinks.resendSite}
             target={"_blank"}
-            className="font-medium border-b border-dashed"
+            className="font-medium border-b-[0.5px] border-dashed"
           >
             Resend
+          </a>
+          ,{" "}
+          <a
+            href={siteLinks.plunkSite}
+            target={"_blank"}
+            className="font-medium border-b-[0.5px] border-dashed"
+          >
+            Plunk
           </a>
           )
         </p>
