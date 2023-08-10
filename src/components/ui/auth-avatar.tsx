@@ -13,10 +13,8 @@ import { UserContext } from "@/context/user";
 import { Button } from "./button";
 import { useRouter } from "next/navigation";
 import { routes } from "@/lib/routes";
-import { useClerk } from "@clerk/nextjs";
 
 export function AuthAvatar() {
-  const { signOut } = useClerk();
   const router = useRouter();
   const {
     state: { user },
