@@ -14,7 +14,7 @@ export function Navigation() {
     <div className="w-full sticky top-0 pt-5">
       <div className="container flex h-16 items-center justify-between">
         <Link
-          aria-label="Home"
+          aria-label={siteInfo.name}
           href={routes.home}
           className="items-center space-x-2 flex"
         >
