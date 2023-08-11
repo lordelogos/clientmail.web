@@ -17,7 +17,7 @@ export function Footer() {
         <div className="flex-1 text-left text-sm leading-loose text-muted-foreground">
           Built by{" "}
           <a
-            aria-label="Client-mail service author"
+            aria-label={siteConfig.creator ?? ""}
             href={siteLinks.githubPersonal}
             target="_blank"
             rel="noreferrer"
