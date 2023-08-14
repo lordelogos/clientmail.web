@@ -1,10 +1,16 @@
 import SSOCallback from "@/components/auth/sso-callback";
 import { Background } from "@/components/ui/background";
 import { type HandleOAuthCallbackParams } from "@clerk/types";
+import { Metadata } from "next";
 
 export interface SSOCallbackPageProps {
   searchParams: HandleOAuthCallbackParams;
 }
+
+export const metadata: Metadata = {
+  title: "Sign-in",
+  description: "Sign into clientmail",
+};
 
 export default function SSOCallbackPage({
   searchParams,

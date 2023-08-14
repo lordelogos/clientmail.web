@@ -15,7 +15,7 @@ export const siteInfo = {
 
 export const siteConfig: Metadata = {
   title: {
-    default: `Dashboard - ${siteInfo.name}`,
+    default: `${siteInfo.name} - Send Emails from the Client-side Using Javascript.`,
     template: `%s - ${siteInfo.name}`,
   },
   description:

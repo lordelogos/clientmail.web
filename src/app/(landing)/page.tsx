@@ -8,10 +8,6 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Balancer } from "react-wrap-balancer";
 
-export const metadata: Metadata = {
-  title: "Home",
-};
-
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col bg-white/50 dark:bg-slate-950/50">
