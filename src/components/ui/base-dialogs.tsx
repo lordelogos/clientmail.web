@@ -68,7 +68,7 @@ export const BaseDialog: FC<BaseDialogProps> = ({
   description,
   classNames,
 }) => {
-  const { isMobile } = { isMobile: false }; // useMediaQuery();
+  const { isMobile } = useMediaQuery();
 
   if (isMobile) {
     return (

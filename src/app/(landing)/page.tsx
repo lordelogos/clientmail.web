@@ -4,7 +4,6 @@ import { Background } from "@/components/ui/background";
 import { buttonVariants } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
-import { Metadata } from "next";
 import Link from "next/link";
 import { Balancer } from "react-wrap-balancer";
 

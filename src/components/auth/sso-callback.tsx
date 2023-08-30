@@ -4,7 +4,7 @@ import * as React from "react";
 import { useClerk } from "@clerk/nextjs";
 
 import { Loader2 } from "lucide-react";
-import { SSOCallbackPageProps } from "@/app/(auth)/auth/sso-callback/page";
+import { SSOCallbackPageProps } from "@/app/(protected)/(auth)/auth/sso-callback/page";
 
 export default function SSOCallback({ searchParams }: SSOCallbackPageProps) {
   const { handleRedirectCallback } = useClerk();
